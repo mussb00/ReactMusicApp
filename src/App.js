@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+import {useState} from 'react'
+import {Row, Col, Container } from 'react-bootstrap';
 import './App.css';
+import Songs from './components/Songs';
+import Albums from './components/Albums';
+import Header from './components/Header';
+import Introduction from './components/Introduction';
+
 
 function App() {
+  const [Count, setCount] = useState(0);
+
+  function increaseCount(){
+      setCount(prevCount => prevCount + 1)
+  }
+  function decreaseCount(){
+      setCount(prevCount => prevCount - 1)
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+      <Introduction/>
+      <Albums/>
+      <Container>
+        <h2>Top Hits</h2>
+        <Row>
+          <Col aria-label="likeCount">
+            <Songs name="Maniac" count= {Count} increaseCount={increaseCount} decreaseCount = {decreaseCount}/>
+          </Col>
+          <Col>
+            <Songs name="blue" count= {Count} increaseCount={increaseCount} decreaseCount = {decreaseCount}/>
+          </Col>
+          <Col>
+            <Songs name="Chicken" count= {Count} increaseCount={increaseCount} decreaseCount = {decreaseCount}/>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
