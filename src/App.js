@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {Row, Col, Container } from 'react-bootstrap';
+import {Row, Col, Container, Button } from 'react-bootstrap';
 import './App.css';
 import Songs from './components/Songs';
 import Albums from './components/Albums';
@@ -24,17 +24,9 @@ function App() {
       <Albums/>
       <Container>
         <h2>Top Hits</h2>
-        <Row>
-          <Col aria-label="likeCount">
-            <Songs name="Maniac" count= {Count} increaseCount={increaseCount} decreaseCount = {decreaseCount}/>
-          </Col>
-          <Col>
-            <Songs name="blue" count= {Count} increaseCount={increaseCount} decreaseCount = {decreaseCount}/>
-          </Col>
-          <Col>
-            <Songs name="Chicken" count= {Count} increaseCount={increaseCount} decreaseCount = {decreaseCount}/>
-          </Col>
-        </Row>
+        <Songs/>
+        <p>{Count}</p>
+        <Button variant="dark" onClick={Count? decreaseCount: increaseCount}>Like</Button>
       </Container>
     </div>
   );
