@@ -1,25 +1,44 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, useContext} from 'react'
+import { Button } from 'react-bootstrap'
+import { SongContext } from './Song'
+
 
 const Lyrics = () => {
-    const [Lyrics, setLyrics] = useState('No lyrics currently')
 
-    async function changeLyrics (song) {
-        const response = await fetch(`https://api.lyrics.ovh/v1/Conan Gray/${song}`)
+    const Song = useContext(SongContext)
+    const [Lyrics, setLyrics] = useState('Click the button below to display the lyrics!')
+    const [Lyrics2, setLyrics2] = useState('')
+
+    async function changeLyrics (Song) {
+        const response = await fetch(`https://api.lyrics.ovh/v1/Conan Gray/${Song}`)
         const data = await response.json() 
-        console.log(data)
         setLyrics(data.lyrics)
     }
 
+    changeLyrics(Song)
+
+    function displayLyrics (){
+        if (Lyrics2 === ''){
+            setLyrics2(Lyrics)
+        } else {
+            setLyrics2('')
+        }
+    }
+
+    // function reset(str){
+    //     setLyrics(str)
+    // }
+
     useEffect(() => {
         console.log('Lyrics have been changed!')
-    }, [Lyrics])
+    }, [Lyrics2])
     
     return (
         <div>
             {/* {lyrics} keeps up to date with lyrics changes */}
-            <p>{Lyrics}</p> 
-            <button onClick={() => changeLyrics('Maniac')}>Maniac</button> 
-            <button onClick={()=> changeLyrics('Grow')}>Grow</button>
+            <p>{Lyrics2}</p> 
+            <Button variant="dark" onClick={() => displayLyrics()}>Toggle Lyrics On/Off</Button>
+            {/* <Button variant="dark" onclick={() =>  reset('C')}>Remove Lyrics</Button> */}
         </div>
     )
 }

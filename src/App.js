@@ -4,9 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import './App.css';
 import Song from './components/Song';
 import Albums from './components/Albums';
-import Header from './components/Header';
 import Introduction from './components/Introduction';
-import Lyrics from './components/Lyrics';
 import BackButton from './components/BackButton';
 
 
@@ -43,7 +41,6 @@ function App() {
             </Nav>
           </Container>
         </Navbar>
-      <h1>Conan Gray</h1>
       <Switch>
         <Route exact path="/About">
           <Introduction/>
@@ -54,7 +51,8 @@ function App() {
         <Route exact path="/Album/:Song">
           <Container>
             <Song />
-            {/* <Button variant="dark" onClick={Count ? decreaseCount : increaseCount}>Like</Button> */}
+            <Button variant="dark" onClick={Count ? decreaseCount : increaseCount}>Like</Button>
+            <p>{Count}</p>
           </Container>
         </Route>
       </Switch>
